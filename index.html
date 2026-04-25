@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medix AI — Цифровой ассистент для бригад СМП</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:linear-gradient(145deg,#c8ede0 0%,#b8e8d8 25%,#a8dfd0 50%,#98d5c8 75%,#8ecec4 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:32px}
+.landing{display:flex;align-items:flex-start;gap:52px;max-width:820px;width:100%;position:relative;overflow:hidden}
+
+/* ── PROMO REEL ── */
+.promo-section{width:100%;max-width:820px}
+.promo-label{font-size:10px;font-weight:700;color:#0d6a48;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px}
+.promo-label::before,.promo-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.6);max-width:80px}
+.promo-reel-wrap{background:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.7);border-radius:24px;padding:20px;backdrop-filter:blur(8px);box-shadow:0 8px 32px rgba(0,80,60,.12)}
+.preel{position:relative;width:100%;height:420px;overflow:hidden;border-radius:16px;background:linear-gradient(160deg,#C8E6C9 0%,#B2DFDB 40%,#A8D5E2 100%)}
+.pscene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;pointer-events:none;padding:16px}
+.pscene.active{opacity:1;transform:translateY(0);pointer-events:all}
+.pscene.exit{opacity:0;transform:translateY(-20px)}
+
+/* Phone mockup in reel */
+.rp-phone{background:#fff;border-radius:22px;box-shadow:0 6px 28px rgba(0,0,0,.12);width:180px;overflow:hidden;flex-shrink:0;animation:rpopIn .7s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes rpopIn{from{opacity:0;transform:scale(.78)}to{opacity:1;transform:scale(1)}}
+.rp-hdr{background:linear-gradient(135deg,#f0faf8,#e8f5f0);padding:10px 12px 9px;text-align:center;border-bottom:1px solid rgba(43,191,170,.2)}
+.rp-logo{font-size:15px;font-weight:800;color:#1A9E8C;letter-spacing:-.5px;margin-bottom:2px}
+.rp-sub{font-size:8px;color:#7A8FA6;margin-bottom:7px}
+.rp-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(43,191,170,.1);border:1px solid rgba(43,191,170,.3);border-radius:100px;padding:3px 9px;font-size:7.5px;color:#1A9E8C;font-weight:600}
+.rp-bdot{width:5px;height:5px;background:#2BBFAA;border-radius:50%;animation:rpblink 1.5s infinite}
+@keyframes rpblink{0%,100%{opacity:1}50%{opacity:.3}}
+.rp-mods{padding:8px 10px}
+.rp-ml{font-size:7px;font-weight:700;color:#7A8FA6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.rp-mi{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:9px;padding:6px 8px;margin-bottom:5px;box-shadow:0 1px 5px rgba(0,0,0,.04)}
+.rp-mi:last-child{margin-bottom:0}
+.rp-ico{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.rp-ico.bl{background:#E3F4FF}.rp-ico.gr{background:#E8F8EF}.rp-ico.pu{background:#F0EEFF}.rp-ico.ye{background:#FFF4E0}
+.rp-mt{font-size:9px;font-weight:600;color:#1A2332;flex:1}
+.rp-md{font-size:7.5px;color:#7A8FA6;margin-top:1px}
+.rp-arr{font-size:9px;color:#7A8FA6}
+.rp-foot{text-align:center;padding:6px;font-size:7px;color:#7A8FA6;letter-spacing:.8px;text-transform:uppercase;border-top:1px solid rgba(0,0,0,.05)}
+
+/* Copy block in reel */
+.rp-copy{flex:1;animation:rfadeUp .6s ease both;animation-delay:.25s}
+@keyframes rfadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.rp-tag{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1.5px solid rgba(43,191,170,.2);border-radius:100px;padding:4px 10px;font-size:10px;color:#1A9E8C;font-weight:700;margin-bottom:9px;box-shadow:0 2px 8px rgba(43,191,170,.12)}
+.rp-h{font-size:17px;font-weight:800;color:#1A2332;line-height:1.25;margin-bottom:10px}
+.rp-h em{color:#1A9E8C;font-style:normal}
+.rp-blist{display:flex;flex-direction:column;gap:6px}
+.rp-bl{display:flex;align-items:flex-start;gap:7px;background:#fff;border-radius:10px;padding:8px 10px;box-shadow:0 2px 8px rgba(0,0,0,.06);animation:rfadeUp .45s ease both}
+.rp-bl:nth-child(1){animation-delay:.3s}.rp-bl:nth-child(2){animation-delay:.4s}.rp-bl:nth-child(3){animation-delay:.5s}.rp-bl:nth-child(4){animation-delay:.6s}
+.rp-bico{width:20px;height:20px;background:rgba(43,191,170,.14);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.rp-btxt{font-size:11px;color:#1A2332;line-height:1.4}
+.rp-layout{display:flex;gap:18px;align-items:flex-start;width:100%;max-width:560px}
+
+/* Screen mockups in reel */
+.rp-card{background:#fff;border-radius:20px;box-shadow:0 5px 24px rgba(0,0,0,.1);width:180px;flex-shrink:0;overflow:hidden;animation:rslide .6s cubic-bezier(.34,1.56,.64,1) both;animation-delay:.12s}
+@keyframes rslide{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
+.rp-card-hdr{padding:10px 12px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(43,191,170,.15)}
+.rp-card-back{width:22px;height:22px;background:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;box-shadow:0 1px 4px rgba(0,0,0,.1);flex-shrink:0}
+.rp-card-title{font-size:11px;font-weight:700;color:#1A2332}
+.rp-card-sub{font-size:8px;color:#7A8FA6}
+.rp-card-body{padding:9px}
+
+/* Karta tabs */
+.rp-tabs{display:flex;gap:4px;margin-bottom:9px}
+.rp-tab{flex:1;text-align:center;padding:5px 3px;border-radius:7px;font-size:8.5px;font-weight:600;border:1.5px solid rgba(43,191,170,.2);color:#7A8FA6;background:#fff}
+.rp-tab.a{background:#2BBFAA;border-color:#2BBFAA;color:#fff}
+.rp-ex{display:flex;align-items:flex-start;gap:6px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:9px;padding:7px 8px;margin-bottom:5px;box-shadow:0 1px 5px rgba(0,0,0,.04)}
+.rp-ex-ico{font-size:11px;flex-shrink:0}
+.rp-ex-txt{font-size:8.5px;color:#1A2332;line-height:1.35}
+.rp-inp{background:#F5F8FA;border:1.5px solid rgba(43,191,170,.2);border-radius:9px;padding:6px 9px;font-size:8px;color:#7A8FA6;margin-top:3px;display:flex;align-items:center;justify-content:space-between}
+.rp-send{width:22px;height:22px;background:#2BBFAA;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px}
+
+/* Med card */
+.rp-med-hdr{background:linear-gradient(135deg,#e8f5f0,#e0f4ef);padding:9px 11px;border-bottom:1px solid rgba(43,191,170,.15)}
+.rp-mtabs1{display:flex;gap:4px;margin-bottom:6px}
+.rp-mt1{flex:1;text-align:center;padding:4px 2px;border-radius:7px;font-size:8px;font-weight:600;border:1.5px solid rgba(43,191,170,.2);color:#7A8FA6}
+.rp-mt1.a{background:#2BBFAA;border-color:#2BBFAA;color:#fff}
+.rp-drug{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.04)}
+.rp-drug:last-child{border-bottom:none}
+.rp-dn{font-size:9px;font-weight:600;color:#1A2332;flex:1}
+.rp-dd{font-size:7.5px;color:#7A8FA6}
+.rp-cm{width:18px;height:18px;background:#FFF0F0;border:1px solid #FFD0D0;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#E63946;font-weight:700}
+.rp-cn{font-size:10px;font-weight:700;color:#1A2332;width:14px;text-align:center}
+.rp-cp{width:18px;height:18px;background:#F0FFF8;border:1px solid #B0EFD0;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#4CAF7D;font-weight:700}
+
+/* AI card */
+.rp-ai-hdr{background:linear-gradient(135deg,#f0eeff,#ebe5ff);padding:9px 11px;border-bottom:1px solid rgba(124,58,237,.12)}
+.rp-ai-title{font-size:11px;font-weight:700;color:#1A2332}
+.rp-ai-sub{font-size:8px;color:#8B6FD4}
+.rp-ai-body{padding:9px}
+.rp-msg-u{background:#2BBFAA;color:#fff;border-radius:10px 10px 3px 10px;padding:7px 9px;font-size:8.5px;line-height:1.4;margin-bottom:8px;margin-left:16px}
+.rp-msg-b{background:#F5F8FF;border:1px solid rgba(124,58,237,.12);border-radius:3px 10px 10px 10px;padding:7px 9px;font-size:8.5px;line-height:1.45;color:#1A2332}
+.rp-msg-b strong{color:#7C3AED}
+.rp-bhead{display:flex;align-items:center;gap:5px;margin-bottom:5px}
+.rp-bav{width:18px;height:18px;background:linear-gradient(135deg,#7C3AED,#A78BFA);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0}
+.rp-bn{font-size:8.5px;font-weight:700;color:#7C3AED}
+.rp-ty{display:flex;gap:3px;margin-top:6px;padding:6px 8px;background:#F5F8FF;border-radius:7px;width:fit-content}
+.rp-tyd{width:5px;height:5px;background:#A78BFA;border-radius:50%;animation:rty 1.2s ease-in-out infinite}
+.rp-tyd:nth-child(2){animation-delay:.2s}.rp-tyd:nth-child(3){animation-delay:.4s}
+@keyframes rty{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+/* Calc card */
+.rp-calc-hdr{background:linear-gradient(135deg,#fff4e0,#ffefd5);padding:9px 11px;border-bottom:1px solid rgba(255,140,0,.15)}
+.rp-calc-title{font-size:11px;font-weight:700;color:#1A2332}
+.rp-calc-sub{font-size:8px;color:#D4830A}
+.rp-calc-body{padding:9px}
+.rp-ctabs{display:flex;gap:4px;margin-bottom:9px}
+.rp-ctab{flex:1;text-align:center;padding:5px;border-radius:7px;font-size:8.5px;font-weight:700;border:1.5px solid rgba(43,191,170,.2);color:#7A8FA6}
+.rp-ctab.a{background:#2BBFAA;border-color:#2BBFAA;color:#fff}
+.rp-res{background:linear-gradient(135deg,#FFF8F0,#FFF4E8);border:1.5px solid rgba(255,140,0,.22);border-radius:11px;padding:10px;text-align:center;margin-bottom:8px}
+.rp-res-l{font-size:7.5px;font-weight:700;color:#D4830A;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.rp-res-n{font-size:24px;font-weight:800;color:#FF8C00;line-height:1}
+.rp-params{display:flex;gap:5px;margin-bottom:6px}
+.rp-pb{flex:1;background:#F5F8FA;border:1px solid rgba(43,191,170,.15);border-radius:7px;padding:5px;text-align:center}
+.rp-pl{font-size:7.5px;color:#7A8FA6;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
+.rp-pv{font-size:12px;font-weight:800;color:#1A2332}
+.rp-rec{background:#FFFBF0;border:1px solid rgba(255,140,0,.15);border-radius:8px;padding:7px;font-size:8.5px;color:#1A2332;line-height:1.4}
+.rp-rec-h{font-weight:700;color:#D4830A;margin-bottom:2px}
+
+/* Demo slide */
+.rp-demo-wrap{z-index:1;width:100%;max-width:520px;animation:rfadeUp .7s ease both}
+.rp-demo-top{text-align:center;margin-bottom:14px}
+.rp-demo-tag{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1.5px solid rgba(43,191,170,.2);border-radius:100px;padding:4px 12px;font-size:10px;color:#1A9E8C;font-weight:700;margin-bottom:8px;box-shadow:0 2px 8px rgba(43,191,170,.12)}
+.rp-demo-h{font-size:19px;font-weight:800;color:#1A2332;line-height:1.2}
+.rp-demo-h em{color:#1A9E8C;font-style:normal}
+.rp-demo-sub{font-size:12px;color:#7A8FA6;margin-top:3px}
+.rp-demo-card{background:#fff;border-radius:20px;box-shadow:0 5px 24px rgba(0,0,0,.1);padding:16px;display:flex;gap:14px;align-items:flex-start}
+.rp-dleft{flex:1}
+.rp-dsec{font-size:9px;font-weight:700;color:#7A8FA6;text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px}
+.rp-dinp-row{display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.rp-dinp{background:#F5F8FA;border:1.5px solid rgba(43,191,170,.2);border-radius:11px;padding:7px 11px;transition:border-color .2s}
+.rp-dinp:focus-within{border-color:#2BBFAA}
+.rp-dinp-l{font-size:9px;color:#7A8FA6;font-weight:600;margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px}
+.rp-dinp-f{width:100%;background:transparent;border:none;outline:none;font-size:17px;font-weight:800;color:#1A2332;font-family:'Inter',sans-serif}
+.rp-dinp-f::placeholder{color:#C5D0DB;font-weight:400;font-size:13px}
+.rp-presets{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.rp-preset{background:rgba(43,191,170,.08);border:1px solid rgba(43,191,170,.22);border-radius:100px;padding:3px 9px;font-size:9px;font-weight:600;color:#1A9E8C;cursor:pointer;transition:all .2s}
+.rp-preset:hover{background:#2BBFAA;color:#fff;border-color:#2BBFAA}
+.rp-calc-btn{width:100%;background:#2BBFAA;color:#fff;border:none;border-radius:10px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-bottom:8px}
+.rp-calc-btn:hover{background:#1A9E8C}
+.rp-site-btn{width:100%;background:rgba(255,255,255,.9);color:#1A9E8C;border:1.5px solid rgba(43,191,170,.3);border-radius:10px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-align:center;display:block;text-decoration:none}
+.rp-site-btn:hover{background:#fff;border-color:#2BBFAA;box-shadow:0 2px 12px rgba(43,191,170,.25)}
+.rp-dright{width:160px;flex-shrink:0}
+.rp-res-empty{background:#F5F8FA;border:2px dashed rgba(43,191,170,.25);border-radius:14px;min-height:196px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px}
+.rp-res-empty-ico{font-size:26px;margin-bottom:6px;opacity:.4}
+.rp-res-empty-txt{font-size:11px;color:#7A8FA6;line-height:1.4}
+.rp-res-filled{background:linear-gradient(135deg,#FFF8F0,#FFF4E8);border:2px solid rgba(255,140,0,.28);border-radius:14px;min-height:196px;padding:12px;display:none;flex-direction:column;align-items:center;animation:rpopIn .4s cubic-bezier(.34,1.56,.64,1)}
+.rp-rf-idx{font-size:40px;font-weight:800;line-height:1;margin:5px 0 3px}
+.rp-rf-ps{display:flex;gap:5px;width:100%;margin-bottom:7px}
+.rp-rf-p{flex:1;background:#fff;border-radius:7px;padding:5px;text-align:center;border:1px solid rgba(255,140,0,.12)}
+.rp-rf-pl{font-size:8px;color:#7A8FA6;text-transform:uppercase;letter-spacing:.3px;margin-bottom:1px}
+.rp-rf-pv{font-size:12px;font-weight:800;color:#1A2332}
+.rp-rf-deg{border-radius:8px;padding:6px 8px;width:100%;text-align:center;font-size:10px;font-weight:700;margin-bottom:6px}
+.rp-rf-rec{background:#fff;border-radius:8px;padding:7px;font-size:9px;color:#1A2332;line-height:1.4;width:100%;border:1px solid rgba(255,140,0,.12)}
+
+/* Reel nav */
+.preel-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}
+.preel-dot{width:7px;height:7px;border-radius:100px;background:rgba(13,74,56,.2);transition:all .4s;cursor:pointer}
+.preel-dot.a{background:#1A9E8C;width:20px}
+.preel-btn{width:32px;height:32px;background:rgba(255,255,255,.8);border:1.5px solid rgba(43,191,170,.25);border-radius:50%;color:#1A2332;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.preel-btn:hover{background:#2BBFAA;border-color:#2BBFAA;color:#fff}
+.blob{position:absolute;border-radius:50%;pointer-events:none}
+.blob1{width:280px;height:280px;background:rgba(255,255,255,.25);top:-80px;left:-80px}
+.blob2{width:200px;height:200px;background:rgba(100,210,190,.2);bottom:-50px;right:180px}
+.blob3{width:150px;height:150px;background:rgba(255,255,255,.15);top:30%;right:-40px}
+.left{flex:1;max-width:320px;z-index:1;padding-top:6px}
+.lang-toggle{display:inline-flex;background:rgba(255,255,255,.55);border-radius:20px;padding:3px;margin-bottom:14px;border:1px solid rgba(255,255,255,.9)}
+.lang-btn{padding:4px 13px;border-radius:16px;font-size:11px;font-weight:600;border:none;cursor:pointer;background:none;color:#4a8a78;font-family:'Inter',sans-serif;transition:all .2s}
+.lang-btn.active{background:#1bb88a;color:#fff}
+.brand{font-size:36px;font-weight:800;color:#0d4a38;letter-spacing:-1px;line-height:1;margin-bottom:4px}
+.tagline{font-size:12px;color:#2a6a56;margin-bottom:10px}
+.online-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.65);border:1.5px solid #1bb88a;border-radius:20px;padding:4px 12px;font-size:10px;color:#0d7a5c;font-weight:600;margin-bottom:9px}
+.online-dot{width:6px;height:6px;background:#1bb88a;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.subtitle{font-size:10.5px;color:#2a6a56;line-height:1.6;margin-bottom:12px}
+.sec-label{font-size:8.5px;font-weight:700;color:#0d6a48;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.sec-label::before{content:'';display:inline-block;width:14px;height:2px;background:#1bb88a;border-radius:2px}
+.for-who{margin-bottom:13px}
+.for-who-cards{display:flex;flex-direction:column;gap:4px}
+.fw-card{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.8);border-radius:10px;padding:7px 10px}
+.fw-ico{font-size:16px;flex-shrink:0}
+.fw-text{font-size:10.5px;font-weight:600;color:#0d3a2a}
+.fw-desc{font-size:9.5px;color:#3a7a62;margin-top:1px}
+.features{display:flex;flex-direction:column;gap:0}
+.feature-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.5)}
+.feature-row:last-child{border-bottom:none}
+.feat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px}
+.feat-icon.blue{background:rgba(220,238,255,.9)}.feat-icon.green{background:rgba(212,245,228,.9)}.feat-icon.purple{background:rgba(237,232,255,.9)}.feat-icon.yellow{background:rgba(255,243,212,.9)}
+.feat-text h4{font-size:11px;font-weight:700;color:#0d3a2a;margin-bottom:2px}
+.feat-text p{font-size:10px;color:#2a6a56;line-height:1.4}
+.feat-text .tag{display:inline-block;margin-top:3px;background:rgba(255,255,255,.5);color:#0d6a48;font-size:8.5px;font-weight:600;padding:2px 6px;border-radius:5px;border:1px solid rgba(27,184,138,.3)}
+.right{flex-shrink:0;z-index:1}
+.phone-wrap{position:relative;width:260px;height:560px}
+.phone-shadow{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);width:180px;height:24px;background:rgba(0,0,0,.12);border-radius:50%;filter:blur(10px)}
+.phone-frame{width:260px;height:560px;background:#f0f4f0;border-radius:38px;border:2.5px solid rgba(255,255,255,.9);padding:9px 7px;position:relative;box-shadow:0 16px 50px rgba(0,80,60,.2),inset 0 0 0 1px rgba(255,255,255,.95)}
+.phone-notch{width:68px;height:6px;background:#d0e8e0;border-radius:10px;margin:0 auto 6px}
+.phone-screen{background:linear-gradient(170deg,#eef8f3 0%,#e4f4ee 60%,#ddf0ea 100%);border-radius:27px;height:522px;overflow:hidden;position:relative}
+.screen{display:none;height:100%;flex-direction:column;animation:fadeIn .2s ease}
+.screen.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.h-inner{padding:13px 13px 9px;display:flex;flex-direction:column;height:100%}
+.h-brand{font-size:20px;font-weight:800;color:#0d4a38;text-align:center;letter-spacing:-.5px;margin-bottom:2px}
+.h-sub{font-size:8px;color:#5a9a88;text-align:center;margin-bottom:6px}
+.h-online{display:flex;align-items:center;justify-content:center;gap:4px;background:rgba(255,255,255,.7);border:1.5px solid #1bb88a;border-radius:18px;padding:3px 11px;margin:0 auto 5px;width:fit-content;font-size:8px;font-weight:600;color:#1bb88a}
+.h-online .d{width:5px;height:5px;background:#1bb88a;border-radius:50%;animation:pulse 2s infinite}
+.h-subs{text-align:center;font-size:8px;color:#5a9a88;line-height:1.5;margin-bottom:8px}
+.hdiv{border:none;border-top:1px solid rgba(255,255,255,.7);margin:0 0 7px}
+.mlabel{font-size:7.5px;font-weight:700;color:#7ab8a8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.mlist{display:flex;flex-direction:column;gap:4px}
+.mbtn{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.95);border-radius:11px;padding:7px 9px;cursor:pointer;transition:all .15s;text-align:left;width:100%}
+.mbtn:hover{background:rgba(255,255,255,.95)}.mbtn:active{transform:scale(.98)}
+.mico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.mico.blue{background:rgba(220,238,255,.9)}.mico.green{background:rgba(212,245,228,.9)}.mico.purple{background:rgba(237,232,255,.9)}.mico.yellow{background:rgba(255,243,196,.9)}
+.mtxt{flex:1}.mt{font-size:10px;font-weight:600;color:#0d3a2a}.md{font-size:7.5px;color:#6a9a8a;margin-top:1px}
+.marr{font-size:9px;color:#a0c8b8}
+.hfoot{text-align:center;font-size:7px;color:#7ab8a8;letter-spacing:.06em;text-transform:uppercase;margin-top:auto;padding-top:5px}
+.sc-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 10px 7px;background:rgba(255,255,255,.45);border-bottom:1px solid rgba(255,255,255,.6);flex-shrink:0}
+.sc-hdr-l{display:flex;align-items:center;gap:5px}
+.bbtn{width:22px;height:22px;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:6px;color:#0d4a38;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sc-title{font-size:10px;font-weight:700;color:#0d3a2a}.sc-sub{font-size:7px;color:#6a9a8a}
+.lang-sm{display:flex;background:rgba(255,255,255,.55);border-radius:10px;padding:2px}
+.lang-sm-btn{padding:2px 6px;border-radius:8px;font-size:7.5px;font-weight:700;border:none;background:none;color:#6a9a8a;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.lang-sm-btn.active{background:#1bb88a;color:#fff}
+.tabrow{display:flex;gap:4px;padding:7px 9px 0;flex-shrink:0}
+.tpill{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 4px;border-radius:12px;font-size:18px;border:1.5px solid rgba(255,255,255,.8);background:rgba(255,255,255,.55);cursor:pointer;transition:all .15s}
+.tpill.active{background:#1bb88a;border-color:#1bb88a;transform:scale(1.05)}
+.tpill:hover:not(.active){background:rgba(255,255,255,.85)}
+.kbody{flex:1;overflow-y:auto;padding:8px 10px}
+.tc{display:none}.tc.active{display:block}
+.elabel{font-size:8px;font-weight:700;color:#7ab8a8;letter-spacing:.08em;text-transform:uppercase;text-align:center;margin-bottom:7px}
+.ecard{display:flex;align-items:flex-start;gap:9px;background:rgba(255,255,255,.85);border:1.5px solid rgba(255,255,255,.95);border-radius:13px;padding:10px 12px;margin-bottom:6px;font-size:10.5px;font-weight:500;color:#1a3a2a;line-height:1.45;box-shadow:0 2px 8px rgba(0,80,60,.06)}
+.eico{font-size:16px;flex-shrink:0;margin-top:1px}
+.kinput-bar{display:flex;align-items:center;gap:5px;padding:8px 10px;background:rgba(255,255,255,.35);border-top:1px solid rgba(255,255,255,.6);flex-shrink:0}
+.kinput{flex:1;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:14px;padding:6px 11px;font-size:9px;color:#7a9a8a;font-family:'Inter',sans-serif}
+.ksend{width:30px;height:30px;background:#1bb88a;border:none;border-radius:50%;color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.med-timer{background:rgba(27,184,138,.15);border:1px solid rgba(27,184,138,.3);border-radius:9px;padding:2px 6px;font-size:7px;font-weight:600;color:#0d7a5c;white-space:nowrap}
+.med-tabs{display:flex;gap:4px;padding:6px 9px 0;flex-shrink:0}
+.med-tab{flex:1;padding:8px 4px;border-radius:10px;font-size:18px;border:1.5px solid rgba(255,255,255,.8);background:rgba(255,255,255,.55);cursor:pointer;text-align:center;transition:all .15s}
+.med-tab.active{background:#1bb88a;border-color:#1bb88a;transform:scale(1.05)}
+.med-subtabs{display:flex;gap:4px;padding:4px 9px 0;flex-shrink:0}
+.med-stab{flex:1;padding:7px 4px;border-radius:8px;font-size:16px;border:1.5px solid rgba(255,255,255,.7);background:rgba(255,255,255,.45);cursor:pointer;text-align:center;transition:all .15s}
+.med-stab.active{background:#1bb88a;border-color:#1bb88a;transform:scale(1.05)}
+.med-search{margin:5px 9px 0;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:12px;padding:5px 11px;font-size:9px;color:#7a9a8a;display:flex;align-items:center;gap:5px;flex-shrink:0}
+.med-body{flex:1;overflow-y:auto;padding:6px 9px}
+.med-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.85);border:1.5px solid rgba(255,255,255,.95);border-radius:11px;padding:8px 10px;margin-bottom:4px}
+.med-name{font-size:10.5px;font-weight:600;color:#0d3a2a}.med-desc{font-size:8px;color:#6a9a8a;margin-top:1px}
+.med-ctrl{display:flex;align-items:center;gap:6px}
+.mc-btn{width:22px;height:22px;border-radius:6px;border:none;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mc-minus{background:rgba(255,80,80,.12);color:#e05050}.mc-plus{background:rgba(27,184,138,.2);color:#1bb88a}
+.mc-num{font-size:12px;font-weight:700;color:#0d3a2a;min-width:12px;text-align:center}
+.med-btns{display:flex;flex-direction:column;gap:4px;padding:0 9px 7px;flex-shrink:0}
+.med-action-btn{border-radius:10px;padding:8px;font-size:10px;font-weight:600;cursor:pointer;text-align:center;border:1px solid rgba(255,255,255,.8)}
+.btn-journal{background:rgba(255,255,255,.65);color:#0d4a38}.btn-close{background:rgba(255,180,180,.25);color:#c05050}
+.calc-subtabs{display:flex;gap:4px;padding:7px 9px 0;flex-shrink:0}
+.calc-stab{flex:1;padding:8px 4px;border-radius:12px;font-size:18px;border:1.5px solid rgba(255,255,255,.8);background:rgba(255,255,255,.55);cursor:pointer;text-align:center;transition:all .15s}
+.calc-stab.active{background:#1bb88a;border-color:#1bb88a;transform:scale(1.05)}
+.calc-body{flex:1;overflow-y:auto;padding:8px 9px}
+.ctc{display:none}.ctc.active{display:block}
+.c-sublabel{font-size:7.5px;font-weight:700;color:#7ab8a8;letter-spacing:.08em;text-transform:uppercase;text-align:center;margin:5px 0}
+.age-tabs{display:flex;gap:2px;background:rgba(255,255,255,.55);border-radius:9px;padding:2px;margin-bottom:6px}
+.age-tab{flex:1;padding:5px 1px;border-radius:7px;font-size:7.5px;font-weight:700;border:none;background:none;color:#6a9a8a;cursor:pointer;text-align:center;transition:all .15s;white-space:nowrap;overflow:hidden}
+.age-tab.active{background:#1bb88a;color:#fff}
+.weight-table{background:rgba(255,255,255,.85);border-radius:10px;overflow:hidden;margin-bottom:8px;border:1.5px solid rgba(255,255,255,.95)}
+.wt-row{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid rgba(0,80,60,.05);font-size:10.5px}
+.wt-row:last-child{border-bottom:none}
+.wt-age{color:#2a5a48;font-weight:500}.wt-kg{color:#1bb88a;font-weight:700}
+.c-input-hint{background:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.95);border-radius:12px;padding:7px 11px;font-size:10px;color:#5a8a70;margin-bottom:5px;font-weight:500}
+.ai-msgs{flex:1;overflow-y:auto;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.msg-u{align-self:flex-end;max-width:85%;background:#1bb88a;border-radius:12px 12px 4px 12px;padding:7px 10px;font-size:9.5px;color:#fff;line-height:1.4}
+.msg-a{align-self:flex-start;max-width:92%;background:rgba(255,255,255,.85);border:1.5px solid rgba(255,255,255,.95);border-radius:12px 12px 12px 4px;padding:8px 10px;font-size:9.5px;color:#1a3a2a;line-height:1.5}
+.ai-ico{width:20px;height:20px;background:rgba(237,232,255,.9);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;margin-bottom:4px}
+.sep{border:none;border-top:1px solid rgba(0,80,60,.08);margin:4px 0}
+.sec-head{font-size:8px;font-weight:700;color:#1bb88a;margin-bottom:2px}
+.body-text{font-size:8.5px;color:#1a3a2a;line-height:1.5}
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 700px) {
+  body{padding:16px;gap:20px;justify-content:flex-start;padding-top:24px}
+  .landing{flex-direction:column;align-items:center;gap:24px;max-width:100%}
+  .left{max-width:100%;width:100%;padding-top:0}
+  .brand{font-size:28px}
+  .right{width:100%;display:flex;justify-content:center}
+  .phone-wrap{width:220px;height:474px}
+  .phone-frame{width:220px;height:474px;border-radius:32px}
+  .phone-screen{height:440px;border-radius:23px}
+  .promo-section{max-width:100%}
+  .preel{height:auto;min-height:unset}
+  .pscene{position:relative;inset:unset;transform:none;display:none;padding:12px}
+  .pscene.active{display:flex;opacity:1;transform:none}
+  .pscene.exit{display:none}
+  .rp-layout{flex-direction:column;align-items:center;gap:14px;max-width:100%}
+  .rp-copy{width:100%}
+  .rp-h{font-size:15px}
+  .rp-demo-h{font-size:16px}
+  .rp-demo-card{flex-direction:column;gap:10px}
+  .rp-dright{width:100%}
+  .rp-res-empty,.rp-res-filled{min-height:120px}
+  .blob1{width:180px;height:180px;top:-50px;left:-50px}
+  .blob2{width:140px;height:140px}
+  .blob3{width:100px;height:100px}
+}
+
+@media (max-width: 400px) {
+  body{padding:12px;padding-top:16px}
+  .brand{font-size:24px}
+  .phone-wrap{width:200px;height:430px}
+  .phone-frame{width:200px;height:430px}
+  .phone-screen{height:398px}
+}
+</style>
+</head>
+<body>
+<div class="landing">
+<div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div>
+<div class="left">
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('kaz')">ҚАЗ</button>
+    <button class="lang-btn active" onclick="setLang('rus')">РУС</button>
+  </div>
+  <div class="brand">MEDIX AI</div>
+  <div class="tagline" data-ru="Цифровой ассистент для бригад СМП" data-kz="ЖМЖ бригадалары үшін цифрлық көмекші">Цифровой ассистент для бригад СМП</div>
+  <div class="online-badge"><div class="online-dot"></div><span data-ru="Онлайн · Готов к работе" data-kz="Онлайн · Жұмысқа дайын">Онлайн · Готов к работе</span></div>
+  <div class="subtitle" data-ru="Быстрая помощь на смене<br>Меньше рутины · Больше точности" data-kz="Ауысымда жылдам көмек<br>Аз күнделік · Көп дәлдік">Быстрая помощь на смене<br>Меньше рутины · Больше точности</div>
+  <div class="for-who">
+    <div class="sec-label" data-ru="Для кого" data-kz="Кімдерге арналған">Для кого</div>
+    <div class="for-who-cards">
+      <div class="fw-card"><div class="fw-ico">🚑</div><div><div class="fw-text" data-ru="Фельдшеры СМП" data-kz="ЖМЖ фельдшерлері">Фельдшеры СМП</div><div class="fw-desc" data-ru="Работающие на выездах по всему Казахстану" data-kz="Қазақстан бойынша шақыруларға шығатындар">Работающие на выездах по всему Казахстану</div></div></div>
+      <div class="fw-card"><div class="fw-ico">👨‍⚕️</div><div><div class="fw-text" data-ru="Врачи скорой помощи" data-kz="Жедел жәрдем дәрігерлері">Врачи скорой помощи</div><div class="fw-desc" data-ru="Линейные и специализированные бригады" data-kz="Желілік және мамандандырылған бригадалар">Линейные и специализированные бригады</div></div></div>
+      <div class="fw-card"><div class="fw-ico">🎓</div><div><div class="fw-text" data-ru="Студенты медколледжей" data-kz="Медициналық колледж студенттері">Студенты медколледжей</div><div class="fw-desc" data-ru="Обучение на практике и дежурствах" data-kz="Тәжірибе мен кезекшілікте оқу">Обучение на практике и дежурствах</div></div></div>
+    </div>
+  </div>
+  <div class="sec-label" data-ru="Что умеет" data-kz="Не істей алады">Что умеет</div>
+  <div class="features">
+    <div class="feature-row"><div class="feat-icon blue">📋</div><div class="feat-text"><h4 data-ru="Карта вызова" data-kz="Шақыру картасы">Карта вызова</h4><p data-ru="Опишите вызов — ИИ сформирует карту СМП за секунды." data-kz="Шақыруды сипаттаңыз — ЖЖ ЖМЖ картасын жасайды.">Опишите вызов — ИИ сформирует карту СМП за секунды.</p><span class="tag" data-ru="Экономит до 10 мин на вызов" data-kz="Шақыруға 10 мин үнемдейді">Экономит до 10 мин на вызов</span></div></div>
+    <div class="feature-row"><div class="feat-icon green">💊</div><div class="feat-text"><h4 data-ru="Учёт медикаментов" data-kz="Дәрі-дәрмек есебі">Учёт медикаментов</h4><p data-ru="Никаких журналов — в конце смены перепишите итог." data-kz="Журналдар жоқ — ауысым соңында нәтижені көшіріңіз.">Никаких журналов — в конце смены перепишите итог.</p><span class="tag" data-ru="Никаких потерь и ошибок" data-kz="Жоғалту мен қателер жоқ">Никаких потерь и ошибок</span></div></div>
+    <div class="feature-row"><div class="feat-icon purple">🤖</div><div class="feat-text"><h4 data-ru="Медицинский AI" data-kz="Медициналық ЖЖ">Медицинский AI</h4><p data-ru="Протоколы МЗ РК, дозировки — ответ мгновенно на вызове." data-kz="ҚР ДМ хаттамалары, дозалар — шақыруда бірден жауап.">Протоколы МЗ РК, дозировки — ответ мгновенно на вызове.</p><span class="tag" data-ru="Под рукой 24/7" data-kz="Қолда 24/7">Под рукой 24/7</span></div></div>
+    <div class="feature-row"><div class="feat-icon yellow">🧮</div><div class="feat-text"><h4 data-ru="Калькулятор" data-kz="Калькулятор">Калькулятор</h4><p data-ru="Доза по весу ребёнка и шок по индексу Альговера." data-kz="Баланың салмағы бойынша доза және Альговер шогы.">Доза по весу ребёнка и шок по индексу Альговера.</p><span class="tag" data-ru="Точный расчёт за 3 секунды" data-kz="3 секундта дәл есеп">Точный расчёт за 3 секунды</span></div></div>
+  </div>
+</div>
+<div class="right">
+<div class="phone-wrap">
+  <div class="phone-shadow"></div>
+  <div class="phone-frame">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+      <div class="screen active" id="sc-home">
+        <div class="h-inner">
+          <div class="h-brand">MEDIX AI</div>
+          <div class="h-sub" data-ru="Цифровой ассистент для бригад СМП" data-kz="ЖМЖ бригадалары үшін цифрлық көмекші">Цифровой ассистент для бригад СМП</div>
+          <div class="h-online"><div class="d"></div><span data-ru="Онлайн · Готов к работе" data-kz="Онлайн · Жұмысқа дайын">Онлайн · Готов к работе</span></div>
+          <div class="h-subs" data-ru="Быстрая помощь на смене<br>Меньше рутины · Больше точности" data-kz="Ауысымда жылдам көмек<br>Аз күнделік · Көп дәлдік">Быстрая помощь на смене<br>Меньше рутины · Больше точности</div>
+          <hr class="hdiv">
+          <div class="mlabel" data-ru="Модули" data-kz="Модульдер">Модули</div>
+          <div class="mlist">
+            <button class="mbtn" onclick="showSc('karta')"><div class="mico blue">📋</div><div class="mtxt"><div class="mt" data-ru="Карта вызова" data-kz="Шақыру картасы">Карта вызова</div><div class="md" data-ru="Быстрое заполнение карты СМП" data-kz="ЖМЖ картасын жылдам толтыру">Быстрое заполнение карты СМП</div></div><div class="marr">›</div></button>
+            <button class="mbtn" onclick="showSc('med')"><div class="mico green">💊</div><div class="mtxt"><div class="mt" data-ru="Учёт медикаментов" data-kz="Дәрі-дәрмек есебі">Учёт медикаментов</div><div class="md" data-ru="Контроль прихода и расхода за смену" data-kz="Ауысымдағы кіріс пен шығысты бақылау">Контроль прихода и расхода за смену</div></div><div class="marr">›</div></button>
+            <button class="mbtn" onclick="showSc('ai')"><div class="mico purple">🤖</div><div class="mtxt"><div class="mt" data-ru="Медицинский AI" data-kz="Медициналық ЖЖ">Медицинский AI</div><div class="md" data-ru="Протоколы МЗ РК и быстрые ответы" data-kz="ҚР ДМ хаттамалары мен жылдам жауаптар">Протоколы МЗ РК и быстрые ответы</div></div><div class="marr">›</div></button>
+            <button class="mbtn" onclick="showSc('calc')"><div class="mico yellow">🧮</div><div class="mtxt"><div class="mt" data-ru="Калькулятор" data-kz="Калькулятор">Калькулятор</div><div class="md" data-ru="Дозы детям · Шок-индекс Альговера" data-kz="Балаларға доза · Альговер шок-индексі">Дозы детям · Шок-индекс Альговера</div></div><div class="marr">›</div></button>
+          </div>
+          <div class="hfoot" data-ru="MEDIX AI · СМП КАЗАХСТАН" data-kz="MEDIX AI · ҚАЗАҚСТАН ЖМЖ">MEDIX AI · СМП КАЗАХСТАН</div>
+        </div>
+      </div>
+      <div class="screen" id="sc-karta">
+        <div class="sc-hdr"><div class="sc-hdr-l"><button class="bbtn" onclick="showSc('home')">←</button><div><div class="sc-title" data-ru="Карта вызова" data-kz="Шақыру картасы">Карта вызова</div><div class="sc-sub" data-ru="Карта вызова СМП" data-kz="ЖМЖ шақыру картасы">Карта вызова СМП</div></div></div><div class="lang-sm"><button class="lang-sm-btn" onclick="setLang('kaz')">ҚАЗ</button><button class="lang-sm-btn active" onclick="setLang('rus')">РУС</button></div></div>
+        <div class="tabrow">
+          <button class="tpill active" onclick="showTab('adult',this)">👤</button>
+          <button class="tpill" onclick="showTab('child',this)">👶</button>
+          <button class="tpill" onclick="showTab('preg',this)">🤰</button>
+        </div>
+        <div class="kbody">
+          <div class="tc active" id="tc-adult"><div class="elabel" data-ru="Примеры" data-kz="Мысалдар">Примеры</div><div class="ecard"><div class="eico">❤️</div><span data-ru="ОКС, боль в груди 40 мин, потливость, ЭКГ — подъём ST" data-kz="ЖЖС, кеудедегі ауырсыну 40 мин, ЭКГ — ST көтерілуі">ОКС, боль в груди 40 мин, потливость, ЭКГ — подъём ST</span></div><div class="ecard"><div class="eico">🧠</div><span data-ru="Инсульт, левосторонний парез, нарушение речи, 1 час назад" data-kz="Инсульт, сол жақ парез, сөйлеу бұзылысы, 1 сағат бұрын">Инсульт, левосторонний парез, нарушение речи, 1 час назад</span></div><div class="ecard"><div class="eico">💉</div><span data-ru="Анафилаксия, потеря сознания, АД 60/40, сыпь" data-kz="Анафилаксия, есін жоғалту, АҚ 60/40, бөртпе">Анафилаксия, потеря сознания, АД 60/40, сыпь</span></div></div>
+          <div class="tc" id="tc-child"><div class="elabel" data-ru="Примеры" data-kz="Мысалдар">Примеры</div><div class="ecard"><div class="eico">🌡️</div><span data-ru="Судороги, температура 39.5°C, 7 лет, потеря сознания 3 мин" data-kz="Ұстама, температура 39.5°C, 7 жас, 3 мин есінен тану">Судороги, температура 39.5°C, 7 лет, потеря сознания 3 мин</span></div><div class="ecard"><div class="eico">😮‍💨</div><span data-ru="Ларингоспазм, стридор, одышка, 3 года" data-kz="Ларингоспазм, стридор, ентігу, 3 жас">Ларингоспазм, стридор, одышка, 3 года</span></div><div class="ecard"><div class="eico">🤕</div><span data-ru="ЧМТ, ДТП, потеря сознания, 10 лет, АД 90/60" data-kz="БМЖ, ЖКО, есін жоғалту, 10 жас, АҚ 90/60">ЧМТ, ДТП, потеря сознания, 10 лет, АД 90/60</span></div></div>
+          <div class="tc" id="tc-preg"><div class="elabel" data-ru="Примеры" data-kz="Мысалдар">Примеры</div><div class="ecard"><div class="eico">🚨</div><span data-ru="Эклампсия, судороги, АД 180/110, срок 36 нед" data-kz="Эклампсия, ұстама, АҚ 180/110, мерзім 36 апта">Эклампсия, судороги, АД 180/110, срок 36 нед</span></div><div class="ecard"><div class="eico">🩸</div><span data-ru="Кровотечение, отслойка плаценты, срок 32 нед" data-kz="Қан кету, плацента бөліну, мерзім 32 апта">Кровотечение, отслойка плаценты, срок 32 нед</span></div><div class="ecard"><div class="eico">👶</div><span data-ru="Роды дома, схватки каждые 3 мин, срок 39 нед" data-kz="Үйде босану, 3 минут сайын жиырылу, мерзім 39 апта">Роды дома, схватки каждые 3 мин, срок 39 нед</span></div></div>
+        </div>
+        <div class="kinput-bar"><div class="kinput" data-ru="Опишите вызов..." data-kz="Шақыруды сипаттаңыз..." placeholder="Опишите вызов..."></div><button class="ksend">▶</button></div>
+      </div>
+      <div class="screen" id="sc-med">
+        <div class="sc-hdr"><div class="sc-hdr-l"><button class="bbtn" onclick="showSc('home')">←</button><div><div class="sc-title" data-ru="Учёт медикаментов" data-kz="Дәрі-дәрмек есебі">Учёт медикаментов</div><div class="sc-sub" data-ru="Расход и приход за смену" data-kz="Ауысымдағы шығыс пен кіріс">Расход и приход за смену</div></div></div><div class="med-timer">🟢 3 ч 35 мин</div></div>
+        <div class="med-tabs"><button class="med-tab active">💊</button><button class="med-tab">💉</button><button class="med-tab">📦</button></div>
+        <div class="med-subtabs"><button class="med-stab active">💊</button><button class="med-stab">💉</button><button class="med-stab">⭐</button><button class="med-stab">🩺</button></div>
+        <div class="med-search">🔍 <span data-ru="Поиск..." data-kz="Іздеу...">Поиск...</span></div>
+        <div class="med-body">
+          <div class="med-row"><div><div class="med-name">Ацетилсалициловая к-та</div><div class="med-desc">500 мг, табл</div></div><div class="med-ctrl"><button class="mc-btn mc-minus">−</button><span class="mc-num">1</span><button class="mc-btn mc-plus">+</button></div></div>
+          <div class="med-row"><div><div class="med-name">Бисопролол</div><div class="med-desc">5/10 мг, табл</div></div><div class="med-ctrl"><button class="mc-btn mc-minus">−</button><span class="mc-num">1</span><button class="mc-btn mc-plus">+</button></div></div>
+          <div class="med-row"><div><div class="med-name">Беродуал / Вентолин</div><div class="med-desc">раствор для инг.</div></div><div class="med-ctrl"><button class="mc-btn mc-minus">−</button><span class="mc-num">1</span><button class="mc-btn mc-plus">+</button></div></div>
+          <div class="med-row"><div><div class="med-name">Кворекс</div><div class="med-desc">75 мг, табл</div></div><div class="med-ctrl"><button class="mc-btn mc-minus">−</button><span class="mc-num">0</span><button class="mc-btn mc-plus">+</button></div></div>
+          <div class="med-row"><div><div class="med-name">Брилинта</div><div class="med-desc">90 мг, табл</div></div><div class="med-ctrl"><button class="mc-btn mc-minus">−</button><span class="mc-num">0</span><button class="mc-btn mc-plus">+</button></div></div>
+        </div>
+        <div class="med-btns"><div class="med-action-btn btn-journal">📋 Журнал расхода</div><div class="med-action-btn btn-close">🔄 Закрыть смену</div></div>
+      </div>
+      <div class="screen" id="sc-calc">
+        <div class="sc-hdr"><div class="sc-hdr-l"><button class="bbtn" onclick="showSc('home')">←</button><div><div class="sc-title" data-ru="Калькулятор" data-kz="Калькулятор">Калькулятор</div><div class="sc-sub" data-ru="Дозы детям · Шок-индекс" data-kz="Балаларға доза · Шок-индекс">Дозы детям · Шок-индекс</div></div></div><div class="lang-sm"><button class="lang-sm-btn" onclick="setLang('kaz')">ҚАЗ</button><button class="lang-sm-btn active" onclick="setLang('rus')">РУС</button></div></div>
+        <div class="calc-subtabs"><button class="calc-stab active" onclick="showCalcTab('doses',this)">💊</button><button class="calc-stab" onclick="showCalcTab('shock',this)">⚡</button></div>
+        <div class="calc-body">
+          <div class="ctc active" id="ctc-doses">
+            <div class="c-sublabel">Вес по возрасту</div>
+            <div class="age-tabs"><button class="age-tab active">0–1 год</button><button class="age-tab">1–5 лет</button><button class="age-tab">5–10 лет</button><button class="age-tab">10–15 лет</button></div>
+            <div class="weight-table"><div class="wt-row"><span class="wt-age">3 месяца</span><span class="wt-kg">6 кг</span></div><div class="wt-row"><span class="wt-age">6 месяцев</span><span class="wt-kg">8 кг</span></div><div class="wt-row"><span class="wt-age">9 месяцев</span><span class="wt-kg">9 кг</span></div><div class="wt-row"><span class="wt-age">12 месяцев</span><span class="wt-kg">10 кг</span></div></div>
+            <div class="ecard"><div class="eico">💉</div>Ребёнок 5 лет, 18 кг — церукал в/м</div>
+            <div class="ecard"><div class="eico">👶</div>Ребёнок 3 года, 14 кг — адреналин в/м</div>
+          </div>
+          <div class="ctc" id="ctc-shock">
+            <div class="c-sublabel">Примеры запросов</div>
+            <div class="ecard"><div class="eico">🩸</div>ЧСС 110, АД 90 — гиповолемический шок</div>
+            <div class="ecard"><div class="eico">🚗</div>ЧСС 120, АД 80 — травматический шок (ДТП)</div>
+            <div class="ecard"><div class="eico">🔥</div>ЧСС 130, АД 70 — ожоговый шок</div>
+            <div style="margin-top:8px"><div class="c-input-hint">ЧСС (уд/мин)</div><div class="c-input-hint">АД сист. (мм рт.ст.)</div></div>
+          </div>
+        </div>
+        <div class="kinput-bar"><div class="kinput" placeholder="Укажите возраст, вес и ситуацию..."></div><button class="ksend">▶</button></div>
+      </div>
+      <div class="screen" id="sc-ai">
+        <div class="sc-hdr"><div class="sc-hdr-l"><button class="bbtn" onclick="showSc('home')">←</button><div><div class="sc-title" data-ru="Медицинский AI" data-kz="Медициналық ЖЖ">Медицинский AI</div><div class="sc-sub" data-ru="Протоколы МЗ РК · Актуальные данные" data-kz="ҚР ДМ хаттамалары · Өзекті деректер">Протоколы МЗ РК · Актуальные данные</div></div></div><div class="lang-sm"><button class="lang-sm-btn" onclick="setLang('kaz')">ҚАЗ</button><button class="lang-sm-btn active" onclick="setLang('rus')">РУС</button></div></div>
+        <div class="ai-msgs">
+          <div class="msg-u">Судороги у ребёнка 3 лет: диазепам, дозировка и введение</div>
+          <div class="msg-a"><div class="ai-ico">🤖</div><div class="sep"></div><div class="sec-head">▶ 🎯 СУДОРОГИ У РЕБЁНКА 3 ЛЕТ</div><div class="sep"></div><div class="sec-head">▶ 🔴 АЛГОРИТМ · ШАГ 1 (0–1 МИН)</div><div class="body-text">• Уложить на бок (профилактика аспирации)<br>• Убрать опасные предметы<br>• Диазепам 0.5 мг/кг в/м = 0.7 мл (14 кг)</div></div>
+        </div>
+        <div class="kinput-bar"><div class="kinput" placeholder="Задайте медицинский вопрос..."></div><button class="ksend">▶</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- PROMO REEL -->
+<div class="promo-section">
+  <div class="promo-label">Как это работает</div>
+  <div class="promo-reel-wrap">
+    <div class="preel" id="preel">
+
+      <!-- PS1: Главный -->
+      <div id="ps1" class="pscene active">
+        <div class="rp-phone">
+          <div class="rp-hdr">
+            <div class="rp-logo">MEDIX AI</div>
+            <div class="rp-sub">Цифровой ассистент для бригад СМП</div>
+            <div class="rp-badge"><div class="rp-bdot"></div>Онлайн · Готов к работе</div>
+          </div>
+          <div class="rp-mods">
+            <div class="rp-ml">Модули</div>
+            <div class="rp-mi"><div class="rp-ico bl">📋</div><div><div class="rp-mt">Карта вызова</div><div class="rp-md">Быстрое заполнение</div></div><div class="rp-arr">›</div></div>
+            <div class="rp-mi"><div class="rp-ico gr">💊</div><div><div class="rp-mt">Учёт медикаментов</div><div class="rp-md">Приход и расход</div></div><div class="rp-arr">›</div></div>
+            <div class="rp-mi"><div class="rp-ico pu">🤖</div><div><div class="rp-mt">Медицинский AI</div><div class="rp-md">Протоколы МЗ РК</div></div><div class="rp-arr">›</div></div>
+            <div class="rp-mi"><div class="rp-ico ye">🔢</div><div><div class="rp-mt">Калькулятор</div><div class="rp-md">Дозы · Шок-индекс</div></div><div class="rp-arr">›</div></div>
+            <div class="rp-foot">MEDIX AI · СМП КАЗАХСТАН</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PS2: Карта вызова -->
+      <div id="ps2" class="pscene">
+        <div class="rp-layout">
+          <div class="rp-card">
+            <div class="rp-card-hdr" style="background:linear-gradient(135deg,#f0faf8,#e8f5f0);border-bottom:1px solid rgba(43,191,170,.15)">
+              <div class="rp-card-back">←</div><div><div class="rp-card-title">Карта вызова</div><div class="rp-card-sub">Карта вызова СМП</div></div>
+            </div>
+            <div class="rp-card-body">
+              <div class="rp-tabs"><div class="rp-tab a">👤 Взрослый</div><div class="rp-tab">👶 Ребёнок</div><div class="rp-tab">🤰 Беремен.</div></div>
+              <div style="font-size:8px;font-weight:700;color:#7A8FA6;text-transform:uppercase;letter-spacing:1px;text-align:center;margin-bottom:7px">Примеры</div>
+              <div class="rp-ex"><div class="rp-ex-ico">❤️</div><div class="rp-ex-txt">ОКС, боль в груди 40 мин, ЭКГ — подъём ST</div></div>
+              <div class="rp-ex"><div class="rp-ex-ico">🧠</div><div class="rp-ex-txt">Инсульт, парез, нарушение речи, 1 час назад</div></div>
+              <div class="rp-ex"><div class="rp-ex-ico">💉</div><div class="rp-ex-txt">Анафилаксия, АД 60/40, потеря сознания</div></div>
+              <div class="rp-inp"><span>Опишите вызов...</span><div class="rp-send">▶</div></div>
+            </div>
+          </div>
+          <div class="rp-copy">
+            <div class="rp-tag">📋 Карта вызова</div>
+            <div class="rp-h">Заполняй в <em>2 раза быстрее</em></div>
+            <div class="rp-blist">
+              <div class="rp-bl"><div class="rp-bico">✓</div><div class="rp-btxt">Шаблоны взрослый, ребёнок, беременная</div></div>
+              <div class="rp-bl"><div class="rp-bico">🖊</div><div class="rp-btxt">Нажми пример — карта заполнится сама</div></div>
+              <div class="rp-bl"><div class="rp-bico">📖</div><div class="rp-btxt">После смены просто перепиши в журнал</div></div>
+              <div class="rp-bl"><div class="rp-bico">🤖</div><div class="rp-btxt">AI формирует карту по описанию за секунды</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PS3: Медикаменты -->
+      <div id="ps3" class="pscene">
+        <div class="rp-layout">
+          <div class="rp-card">
+            <div class="rp-med-hdr">
+              <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px"><div class="rp-card-back">←</div><div><div class="rp-card-title">Учёт медикаментов</div><div class="rp-card-sub">Расход за смену</div></div><div style="margin-left:auto;background:rgba(43,191,170,.12);border-radius:8px;padding:2px 6px;font-size:8px;color:#1A9E8C;font-weight:600;display:flex;align-items:center;gap:3px"><div class="rp-bdot"></div>3ч 35м</div></div>
+              <div class="rp-mtabs1"><div class="rp-mt1 a">💊 Расход</div><div class="rp-mt1">💉 Приход</div><div class="rp-mt1">📦 Остатки</div></div>
+            </div>
+            <div class="rp-card-body">
+              <div style="background:#F5F8FA;border:1.5px solid rgba(43,191,170,.18);border-radius:8px;padding:5px 8px;font-size:8.5px;color:#7A8FA6;margin-bottom:7px">🔍 Поиск...</div>
+              <div class="rp-drug"><div style="flex:1"><div class="rp-dn">Ацетилсалициловая</div><div class="rp-dd">500 мг, табл</div></div><div class="rp-cm">−</div><div class="rp-cn">1</div><div class="rp-cp">+</div></div>
+              <div class="rp-drug"><div style="flex:1"><div class="rp-dn">Бисопролол</div><div class="rp-dd">5/10 мг, табл</div></div><div class="rp-cm">−</div><div class="rp-cn">1</div><div class="rp-cp">+</div></div>
+              <div class="rp-drug"><div style="flex:1"><div class="rp-dn">Беродуал / Вентолин</div><div class="rp-dd">раствор для инг.</div></div><div class="rp-cm">−</div><div class="rp-cn">1</div><div class="rp-cp">+</div></div>
+              <div class="rp-drug"><div style="flex:1"><div class="rp-dn">Брилинта</div><div class="rp-dd">90 мг, табл</div></div><div class="rp-cm">−</div><div class="rp-cn" style="color:#7A8FA6">0</div><div class="rp-cp">+</div></div>
+            </div>
+          </div>
+          <div class="rp-copy">
+            <div class="rp-tag">💊 Медикаменты</div>
+            <div class="rp-h">Забудь про <em>бумажный журнал</em></div>
+            <div class="rp-blist">
+              <div class="rp-bl"><div class="rp-bico">📦</div><div class="rp-btxt">Таблетки, ампулы, расходники — всё здесь</div></div>
+              <div class="rp-bl"><div class="rp-bico">🔍</div><div class="rp-btxt">Поиск за секунду по всем спискам</div></div>
+              <div class="rp-bl"><div class="rp-bico">⏱</div><div class="rp-btxt">Счётчик смены всегда перед глазами</div></div>
+              <div class="rp-bl"><div class="rp-bico">📝</div><div class="rp-btxt">После смены перепиши остатки в журнал</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PS4: AI -->
+      <div id="ps4" class="pscene">
+        <div class="rp-layout">
+          <div class="rp-card">
+            <div class="rp-ai-hdr"><div style="display:flex;align-items:center;gap:7px"><div class="rp-card-back">←</div><div><div class="rp-ai-title">Медицинский AI</div><div class="rp-ai-sub">Протоколы МЗ РК</div></div></div></div>
+            <div class="rp-ai-body">
+              <div class="rp-msg-u">Судороги у ребёнка 3 лет: диазепам, дозировка</div>
+              <div class="rp-msg-b"><div class="rp-bhead"><div class="rp-bav">🤖</div><div class="rp-bn">Medix AI</div></div><strong>СУДОРОГИ · РЕБЁНОК 3 ЛЕТ</strong><br><br>Диазепам 0.5 мг/кг ректально<br>→ Вес ~14 кг → доза <strong>7 мг</strong><br>→ При неэффект. повторить</div>
+              <div class="rp-ty"><div class="rp-tyd"></div><div class="rp-tyd"></div><div class="rp-tyd"></div></div>
+            </div>
+          </div>
+          <div class="rp-copy">
+            <div class="rp-tag">🤖 Медицинский AI</div>
+            <div class="rp-h">Врач-консультант в <em>твоём кармане</em></div>
+            <div class="rp-blist">
+              <div class="rp-bl"><div class="rp-bico">📋</div><div class="rp-btxt">Протоколы МЗ РК — актуальные алгоритмы</div></div>
+              <div class="rp-bl"><div class="rp-bico">⚡</div><div class="rp-btxt">Опиши симптомы — тактику получишь сразу</div></div>
+              <div class="rp-bl"><div class="rp-bico">🌐</div><div class="rp-btxt">Поиск по медбазам в реальном времени</div></div>
+              <div class="rp-bl"><div class="rp-bico">🆘</div><div class="rp-btxt">Помогает в нестандартных вызовах</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PS5: Калькулятор -->
+      <div id="ps5" class="pscene">
+        <div class="rp-layout">
+          <div class="rp-card">
+            <div class="rp-calc-hdr"><div style="display:flex;align-items:center;gap:7px"><div class="rp-card-back">←</div><div><div class="rp-calc-title">Калькулятор</div><div class="rp-calc-sub">Дозы детям · Шок-индекс</div></div></div></div>
+            <div class="rp-calc-body">
+              <div class="rp-ctabs"><div class="rp-ctab">💊 Дозы</div><div class="rp-ctab a">⚡ Шок-индекс</div></div>
+              <div class="rp-res"><div class="rp-res-l">● Результат</div><div class="rp-res-n">1.22</div></div>
+              <div class="rp-params">
+                <div class="rp-pb"><div class="rp-pl">ЧСС</div><div class="rp-pv">110</div></div>
+                <div class="rp-pb"><div class="rp-pl">АД</div><div class="rp-pv">90</div></div>
+                <div class="rp-pb"><div class="rp-pl">Степень</div><div class="rp-pv" style="font-size:9px;color:#FF8C00">II (сред.)</div></div>
+              </div>
+              <div class="rp-rec"><div class="rp-rec-h">💡 Рекомендация</div>Средний шок. Инфузия 1000 мл в/в. Допамин 5–10 мкг/кг/мин.</div>
+            </div>
+          </div>
+          <div class="rp-copy">
+            <div class="rp-tag">🔢 Калькулятор</div>
+            <div class="rp-h">Точная доза за <em>3 секунды</em></div>
+            <div class="rp-blist">
+              <div class="rp-bl"><div class="rp-bico">👶</div><div class="rp-btxt">Педиатрия — вес считает сам по возрасту</div></div>
+              <div class="rp-bl"><div class="rp-bico">⚡</div><div class="rp-btxt">Шок-индекс Альговера мгновенно</div></div>
+              <div class="rp-bl"><div class="rp-bico">✅</div><div class="rp-btxt">Никаких ошибок в стрессовой ситуации</div></div>
+              <div class="rp-bl"><div class="rp-bico">📴</div><div class="rp-btxt">Работает без AI, мгновенно, офлайн</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PS6: Live Demo + кнопка на сайт -->
+      <div id="ps6" class="pscene">
+        <div class="rp-demo-wrap">
+          <div class="rp-demo-top">
+            <div class="rp-demo-tag">⚡ Живая демо</div>
+            <div class="rp-demo-h">Попробуй <em>прямо сейчас</em></div>
+            <div class="rp-demo-sub">Введи ЧСС и АД — получи шок-индекс</div>
+          </div>
+          <div class="rp-demo-card">
+            <div class="rp-dleft">
+              <div class="rp-dsec">Параметры пациента</div>
+              <div class="rp-dinp-row">
+                <div class="rp-dinp"><div class="rp-dinp-l">ЧСС (уд/мин)</div><input class="rp-dinp-f" id="rp-hr" type="number" placeholder="напр. 110" min="30" max="250"></div>
+                <div class="rp-dinp"><div class="rp-dinp-l">АД сист. (мм рт.ст.)</div><input class="rp-dinp-f" id="rp-bp" type="number" placeholder="напр. 90" min="40" max="250"></div>
+              </div>
+              <div class="rp-presets">
+                <div class="rp-preset" onclick="rpSetPreset(110,90)">110/90</div>
+                <div class="rp-preset" onclick="rpSetPreset(120,80)">120/80</div>
+                <div class="rp-preset" onclick="rpSetPreset(130,70)">130/70</div>
+                <div class="rp-preset" onclick="rpSetPreset(75,120)">75/120</div>
+              </div>
+              <button class="rp-calc-btn" onclick="rpCalc()">⚡ Рассчитать</button>
+              <a href="#" class="rp-site-btn" id="rp-site-link" target="_blank">🌐 Открыть полный сайт</a>
+            </div>
+            <div class="rp-dright">
+              <div class="rp-res-empty" id="rp-res-empty"><div class="rp-res-empty-ico">🔢</div><div class="rp-res-empty-txt">Введи данные<br>и нажми рассчитать</div></div>
+              <div class="rp-res-filled" id="rp-res-filled">
+                <div style="font-size:9px;font-weight:700;color:#D4830A;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Индекс Альговера</div>
+                <div class="rp-rf-idx" id="rp-rf-idx">—</div>
+                <div class="rp-rf-ps"><div class="rp-rf-p"><div class="rp-rf-pl">ЧСС</div><div class="rp-rf-pv" id="rp-rf-hr">—</div></div><div class="rp-rf-p"><div class="rp-rf-pl">АД</div><div class="rp-rf-pv" id="rp-rf-bp">—</div></div></div>
+                <div class="rp-rf-deg" id="rp-rf-deg"></div>
+                <div class="rp-rf-rec" id="rp-rf-rec"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="preel-nav" id="preel-nav">
+      <button class="preel-btn" id="rp-prev">←</button>
+      <div id="rp-dots"></div>
+      <button class="preel-btn" id="rp-next">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function setLang(lang){
+  document.querySelectorAll('.lang-btn,.lang-sm-btn').forEach(btn=>{
+    const isKaz=btn.textContent.trim()==='ҚАЗ';
+    btn.classList.toggle('active',(lang==='kaz'&&isKaz)||(lang==='rus'&&!isKaz));
+  });
+  document.querySelectorAll('[data-ru]').forEach(el=>{
+    const text=lang==='kaz'?el.getAttribute('data-kz'):el.getAttribute('data-ru');
+    if(!text)return;
+    if(text.includes('<br>'))el.innerHTML=text;
+    else el.textContent=text;
+  });
+}
+function showSc(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('sc-'+id).classList.add('active')}
+function showTab(id,btn){document.querySelectorAll('.tc').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('active'));document.getElementById('tc-'+id).classList.add('active');btn.classList.add('active')}
+function showCalcTab(id,btn){document.querySelectorAll('.ctc').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.calc-stab').forEach(t=>t.classList.remove('active'));document.getElementById('ctc-'+id).classList.add('active');btn.classList.add('active')}
+
+// Set site link
+document.getElementById('rp-site-link').href=window.location.href;
+
+// Promo Reel
+const rpScenes=['ps1','ps2','ps3','ps4','ps5','ps6'];
+let rpCur=0,rpTimer=null;
+const rpDots=document.getElementById('rp-dots');
+rpDots.style.cssText='display:flex;gap:6px;align-items:center';
+rpScenes.forEach((_,i)=>{const d=document.createElement('div');d.className='preel-dot'+(i===0?' a':'');d.id='rpd'+i;d.onclick=()=>rpGo(i);rpDots.appendChild(d);});
+function rpGo(n){
+  const p=rpScenes[rpCur];
+  document.getElementById(p).classList.remove('active');document.getElementById(p).classList.add('exit');document.getElementById('rpd'+rpCur).classList.remove('a');
+  setTimeout(()=>document.getElementById(p).classList.remove('exit'),520);
+  rpCur=(n+rpScenes.length)%rpScenes.length;
+  document.getElementById(rpScenes[rpCur]).classList.add('active');document.getElementById('rpd'+rpCur).classList.add('a');
+  clearInterval(rpTimer);rpTimer=setInterval(()=>rpGo(rpCur+1),rpCur===5?14000:5500);
+}
+document.getElementById('rp-prev').onclick=()=>rpGo(rpCur-1);
+document.getElementById('rp-next').onclick=()=>rpGo(rpCur+1);
+rpTimer=setInterval(()=>rpGo(rpCur+1),5500);
+
+function rpSetPreset(hr,bp){document.getElementById('rp-hr').value=hr;document.getElementById('rp-bp').value=bp;rpCalc()}
+function rpCalc(){
+  const hr=parseFloat(document.getElementById('rp-hr').value);
+  const bp=parseFloat(document.getElementById('rp-bp').value);
+  if(!hr||!bp||hr<=0||bp<=0)return;
+  const idx=hr/bp;
+  document.getElementById('rp-rf-idx').textContent=(Math.round(idx*100)/100).toFixed(2);
+  document.getElementById('rp-rf-hr').textContent=Math.round(hr);
+  document.getElementById('rp-rf-bp').textContent=Math.round(bp);
+  let deg,col,bg,rec;
+  if(idx<0.5){deg='Норма';col='#1A9E8C';bg='rgba(43,191,170,.12)';rec='💚 Показатели в норме.';}
+  else if(idx<1.0){deg='I ст. (лёгкий)';col='#4CAF7D';bg='rgba(76,175,77,.12)';rec='💛 Инфузия 500 мл. Контроль АД.';}
+  else if(idx<1.5){deg='II ст. (средний)';col='#FF8C00';bg='rgba(255,140,0,.12)';rec='🟠 Инфузия 1000 мл в/в. Допамин 5–10 мкг/кг/мин.';}
+  else{deg='III ст. (тяжёлый)';col='#E63946';bg='rgba(230,57,70,.12)';rec='🔴 Инфузия макс. быстро. Адреналин. Экстренно!';}
+  const dEl=document.getElementById('rp-rf-deg');
+  dEl.textContent=deg;dEl.style.background=bg;dEl.style.color=col;dEl.style.border='1px solid '+col+'44';
+  document.getElementById('rp-rf-rec').innerHTML='<div style="font-weight:700;color:#D4830A;margin-bottom:2px">💡</div>'+rec;
+  document.getElementById('rp-res-empty').style.display='none';
+  const rf=document.getElementById('rp-res-filled');rf.style.display='flex';rf.style.animation='none';
+  requestAnimationFrame(()=>{rf.style.animation='rpopIn .4s cubic-bezier(.34,1.56,.64,1)'});
+}
+document.getElementById('rp-hr').addEventListener('keydown',e=>{if(e.key==='Enter')rpCalc()});
+document.getElementById('rp-bp').addEventListener('keydown',e=>{if(e.key==='Enter')rpCalc()});
+</script>
+</body>
+</html>
