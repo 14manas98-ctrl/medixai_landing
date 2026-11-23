@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Medix AI — цифровой ассистент для бригад скорой помощи</title>
-<meta name="description" content="Medix AI — Telegram Mini App для бригад СМП: карта вызова, калькулятор доз, ИИ-чат и интерпретация ЭКГ по фото. Создан действующим фельдшером.">
-<meta property="og:title" content="Medix AI — ассистент для бригад скорой помощи">
-<meta property="og:description" content="Карта вызова, калькулятор доз, ИИ-чат и ЭКГ по фото — в Telegram, прямо на смене.">
+<title data-ru="Medix AI — цифровой ассистент для бригад скорой помощи">Medix AI — жедел жәрдем бригадаларына арналған цифрлық көмекші</title>
+<meta name="description" content="Medix AI — жедел жәрдем бригадаларына арналған Telegram Mini App: шақыру картасы, дозалар калькуляторы, ЖИ-чат және ЭКГ-ны фото арқылы талдау. Қызметкер фельдшер жасаған." data-ru="Medix AI — Telegram Mini App для бригад СМП: карта вызова, калькулятор доз, ИИ-чат и интерпретация ЭКГ по фото. Создан действующим фельдшером.">
+<meta property="og:title" content="Medix AI — жедел жәрдем бригадаларына арналған көмекші">
+<meta property="og:description" content="Шақыру картасы, дозалар калькуляторы, ЖИ-чат және ЭКГ фото арқылы — Telegram-да, ауысым кезінде.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.medixai.kz/">
 <meta name="theme-color" content="#0b1f2a">
@@ -90,13 +90,6 @@ h2{font-size:38px;line-height:1.15;letter-spacing:-.8px;font-weight:800;max-widt
 .list{list-style:none;margin-top:22px}
 .list li{padding:9px 0 9px 32px;position:relative;font-size:17px}
 .list li:before{content:"✓";position:absolute;left:0;top:9px;width:22px;height:22px;border-radius:50%;background:var(--teal);color:#04211e;font-size:13px;font-weight:800;display:grid;place-items:center}
-/* price */
-.price{max-width:460px;margin:44px auto 0;text-align:center;padding:38px 30px;border:2px solid var(--teal)}
-.price b{font-size:52px;font-weight:800}
-.price b small{font-size:18px;color:var(--muted);font-weight:600}
-.price ul{list-style:none;margin:20px 0 26px;text-align:left}
-.price li{padding:6px 0 6px 26px;position:relative;color:var(--muted)}
-.price li:before{content:"✓";position:absolute;left:0;color:var(--teal2);font-weight:800}
 /* faq */
 details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-top:12px;max-width:820px}
 summary{font-weight:700;cursor:pointer;font-size:17px}
@@ -119,6 +112,12 @@ footer p{max-width:620px}
  section{padding:64px 0}
 }
 @media(max-width:560px){.g4,.g3,.stats .grid{grid-template-columns:1fr}.stats b{font-size:44px}}
+
+.lang{display:flex;background:rgba(255,255,255,.08);border-radius:10px;padding:3px;gap:2px}
+.lang button{border:0;background:transparent;color:#b9cdd6;font-weight:700;font-size:13px;padding:6px 11px;border-radius:8px;cursor:pointer;font-family:inherit}
+.lang button.on{background:var(--teal);color:#04211e}
+.right{display:flex;align-items:center;gap:14px}
+@media(max-width:560px){.right .btn-sm{display:none}}
 </style>
 </head>
 <body>
@@ -126,8 +125,11 @@ footer p{max-width:620px}
 <header>
  <div class="wrap nav">
   <a class="logo" href="#top"><i>✚</i>MEDIX AI</a>
-  <nav><a href="#features">Возможности</a><a href="#how">Как это работает</a><a href="#about">О проекте</a><a href="#faq">Вопросы</a></nav>
-  <a class="btn btn-p btn-sm" href="https://t.me/medixai_access_bot" target="_blank" rel="noopener">Получить доступ</a>
+  <nav><a href="#features" data-ru="Возможности">Мүмкіндіктер</a><a href="#how" data-ru="Как это работает">Қалай жұмыс істейді</a><a href="#about" data-ru="О проекте">Жоба туралы</a><a href="#faq" data-ru="Вопросы">Сұрақтар</a></nav>
+  <div class="right">
+   <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-l="kk" class="on">ҚАЗ</button><button type="button" data-l="ru">РУС</button></div>
+   <a class="btn btn-p btn-sm" href="https://t.me/medixai_access_bot" target="_blank" rel="noopener" data-ru="Получить доступ">Қолжетімділік алу</a>
+  </div>
  </div>
 </header>
 
@@ -135,88 +137,88 @@ footer p{max-width:620px}
 <div class="hero">
  <div class="wrap">
   <div>
-   <div class="pill"><b></b>Работает в Telegram · Казахстан</div>
-   <h1>Ассистент для бригад скорой помощи — <em>прямо на смене</em></h1>
-   <p class="lead">Карта вызова, калькулятор доз, ИИ-чат по протоколам и разбор ЭКГ по фото. Всё в одном приложении внутри Telegram, без установки.</p>
+   <div class="pill"><b></b><span data-ru="Работает в Telegram · Казахстан">Telegram-да жұмыс істейді · Қазақстан</span></div>
+   <h1 data-ru="Ассистент для бригад скорой помощи — <em>прямо на смене</em>">Жедел жәрдем бригадаларына арналған көмекші — <em>ауысым кезінде тура қолыңызда</em></h1>
+   <p class="lead" data-ru="Карта вызова, калькулятор доз, ИИ-чат по протоколам и разбор ЭКГ по фото. Всё в одном приложении внутри Telegram, без установки.">Шақыру картасы, дозалар калькуляторы, хаттамалар бойынша ЖИ-чат және ЭКГ-ны фото арқылы талдау. Бәрі Telegram ішіндегі бір қосымшада, орнатусыз.</p>
    <div class="cta">
-    <a class="btn btn-p" href="https://t.me/medixai_access_bot" target="_blank" rel="noopener">Написать в Telegram →</a>
-    <a class="btn btn-g" href="#features">Что умеет</a>
+    <a class="btn btn-p" href="https://t.me/medixai_access_bot" target="_blank" rel="noopener" data-ru="Написать в Telegram →">Telegram-ға жазу →</a>
+    <a class="btn btn-g" href="#features" data-ru="Что умеет">Не істей алады</a>
    </div>
-   <small>Создан действующим фельдшером с 8-летним опытом работы на скорой.</small>
+   <small data-ru="Создан действующим фельдшером с 8-летним опытом работы на скорой.">Жедел жәрдемде 8 жыл жұмыс тәжірибесі бар, қызметкер фельдшер жасаған.</small>
   </div>
   <div>
    <div class="phone"><div class="screen">
-    <div class="sbar">Карта вызова <span>● онлайн</span></div>
-    <div class="tabs"><div class="on">Взрослый</div><div>Ребёнок</div><div>Беременная</div></div>
-    <div class="fld tall"><label>Опишите вызов</label>Мужчина 58 лет, боль за грудиной 40 минут, холодный пот…</div>
-    <div class="vit"><div><b>96</b><span>ЧСС</span></div><div><b>140/90</b><span>АД</span></div><div><b>94%</b><span>SpO₂</span></div></div>
-    <div class="fld"><label>Предварительный диагноз</label>заполняется автоматически</div>
-    <div class="fld"><label>Журнал смены</label>перенос после вызова</div>
-    <div class="send">Сформировать карту</div>
+    <div class="sbar"><span style="background:none;color:inherit;font-size:14px;padding:0" data-ru="Карта вызова">Шақыру картасы</span> <span data-ru="● онлайн">● онлайн</span></div>
+    <div class="tabs"><div class="on" data-ru="Взрослый">Ересек</div><div data-ru="Ребёнок">Бала</div><div data-ru="Беременная">Жүкті</div></div>
+    <div class="fld tall"><label data-ru="Опишите вызов">Шақыруды сипаттаңыз</label><span data-ru="Мужчина 58 лет, боль за грудиной 40 минут, холодный пот…">Ер адам, 58 жаста, төс артындағы ауыру 40 минут, суық тер…</span></div>
+    <div class="vit"><div><b>96</b><span data-ru="ЧСС">ЖСЖ</span></div><div><b>140/90</b><span data-ru="АД">ҚБ</span></div><div><b>94%</b><span>SpO₂</span></div></div>
+    <div class="fld"><label data-ru="Предварительный диагноз">Алдын ала диагноз</label><span data-ru="заполняется автоматически">автоматты түрде толтырылады</span></div>
+    <div class="fld"><label data-ru="Журнал смены">Ауысым журналы</label><span data-ru="перенос после вызова">шақырудан кейін көшіріледі</span></div>
+    <div class="send" data-ru="Сформировать карту">Картаны қалыптастыру</div>
    </div></div>
   </div>
  </div>
 </div>
 
 <div class="stats"><div class="wrap"><div class="grid">
- <div><b>158</b><span>уникальных пользователей</span></div>
- <div><b>5 751</b><span>запросов обработано</span></div>
- <div><b>8 лет</b><span>опыт основателя на скорой помощи</span></div>
+ <div><b>158</b><span data-ru="уникальных пользователей">бірегей пайдаланушы</span></div>
+ <div><b>5 751</b><span data-ru="запросов обработано">сұрау өңделді</span></div>
+ <div><b data-ru="8 лет">8 жыл</b><span data-ru="опыт основателя на скорой помощи">негізін қалаушының жедел жәрдемдегі тәжірибесі</span></div>
 </div></div></div>
 
 <section id="features"><div class="wrap">
- <div class="tag">Возможности</div>
- <h2>Всё, что нужно бригаде под рукой</h2>
- <p class="sub">Четыре инструмента, которые экономят время на вызове и в документации.</p>
+ <div class="tag" data-ru="Возможности">Мүмкіндіктер</div>
+ <h2 data-ru="Всё, что нужно бригаде под рукой">Бригадаға қажеттінің бәрі қолыңызда</h2>
+ <p class="sub" data-ru="Четыре инструмента, которые экономят время на вызове и в документации.">Шақыруда да, құжаттамада да уақытты үнемдейтін төрт құрал.</p>
  <div class="grid g4">
-  <div class="card"><div class="ic">📋</div><h3>Карта вызова</h3><p>Опишите вызов своими словами — приложение поможет оформить карту СМП. Меньше бумажной рутины.</p></div>
-  <div class="card"><div class="ic">🧮</div><h3>Калькулятор доз</h3><p>Расчёт по весу и возрасту, вес по возрасту у детей, шок-индекс Альговера.</p></div>
-  <div class="card"><div class="ic">🤖</div><h3>ИИ-чат</h3><p>Быстрые ответы по протоколам и препаратам. Подсказка для специалиста, решение остаётся за вами.</p></div>
-  <div class="card"><div class="ic">🫀</div><h3>ЭКГ по фото</h3><p>Сфотографируйте плёнку и получите предварительную расшифровку. Не заменяет заключение врача.</p></div>
+  <div class="card"><div class="ic">📋</div><h3 data-ru="Карта вызова">Шақыру картасы</h3><p data-ru="Опишите вызов своими словами — приложение поможет оформить карту СМП. Меньше бумажной рутины.">Шақыруды өз сөзіңізбен сипаттаңыз — қосымша ЖМК картасын рәсімдеуге көмектеседі. Қағаз жұмысы азаяды.</p></div>
+  <div class="card"><div class="ic">🧮</div><h3 data-ru="Калькулятор доз">Дозалар калькуляторы</h3><p data-ru="Расчёт по весу и возрасту, вес по возрасту у детей, шок-индекс Альговера.">Салмақ пен жас бойынша есептеу, балалардың жасына сәйкес салмағы, Алговер шок индексі.</p></div>
+  <div class="card"><div class="ic">🤖</div><h3 data-ru="ИИ-чат">ЖИ-чат</h3><p data-ru="Быстрые ответы по протоколам и препаратам. Подсказка для специалиста, решение остаётся за вами.">Хаттамалар мен препараттар бойынша жылдам жауаптар. Маманға арналған кеңес, шешімді өзіңіз қабылдайсыз.</p></div>
+  <div class="card"><div class="ic">🫀</div><h3 data-ru="ЭКГ по фото">ЭКГ фото арқылы</h3><p data-ru="Сфотографируйте плёнку и получите предварительную расшифровку. Не заменяет заключение врача.">Лентаны суретке түсіріңіз де, алдын ала талдау алыңыз. Дәрігердің қорытындысын алмастырмайды.</p></div>
  </div>
 </div></section>
 
 <section id="how" class="alt"><div class="wrap">
- <div class="tag">Как это работает</div>
- <h2>Три шага, ничего устанавливать не нужно</h2>
+ <div class="tag" data-ru="Как это работает">Қалай жұмыс істейді</div>
+ <h2 data-ru="Три шага, ничего устанавливать не нужно">Үш қадам, ештеңе орнатудың қажеті жоқ</h2>
  <div class="grid g3">
-  <div class="card step"><div class="num">1</div><h3>Откройте бота</h3><p>Напишите в Telegram — мы подключим вас к приложению.</p></div>
-  <div class="card step"><div class="num">2</div><h3>Выберите раздел</h3><p>Карта вызова, калькулятор, ИИ-чат или ЭКГ — всё в одном меню.</p></div>
-  <div class="card step"><div class="num">3</div><h3>Работайте быстрее</h3><p>Получайте расчёты и подсказки на вызове, на русском и казахском.</p></div>
+  <div class="card step"><div class="num">1</div><h3 data-ru="Откройте бота">Ботты ашыңыз</h3><p data-ru="Напишите в Telegram — мы подключим вас к приложению.">Telegram-ға жазыңыз — сізді қосымшаға қосып береміз.</p></div>
+  <div class="card step"><div class="num">2</div><h3 data-ru="Выберите раздел">Бөлімді таңдаңыз</h3><p data-ru="Карта вызова, калькулятор, ИИ-чат или ЭКГ — всё в одном меню.">Шақыру картасы, калькулятор, ЖИ-чат немесе ЭКГ — бәрі бір мәзірде.</p></div>
+  <div class="card step"><div class="num">3</div><h3 data-ru="Работайте быстрее">Жылдамырақ жұмыс істеңіз</h3><p data-ru="Получайте расчёты и подсказки на вызове, на русском и казахском.">Шақыру кезінде есептеулер мен кеңестер алыңыз, қазақ және орыс тілдерінде.</p></div>
  </div>
 </div></section>
 
 <section id="about"><div class="wrap about">
  <div>
-  <div class="tag">О проекте</div>
-  <h2>Сделано медиком — для медиков</h2>
-  <p class="sub">Medix AI родился из ежедневной работы на скорой: слишком много бумаг, мало времени, высокая цена ошибки.</p>
+  <div class="tag" data-ru="О проекте">Жоба туралы</div>
+  <h2 data-ru="Сделано медиком — для медиков">Медик жасаған — медиктерге арналған</h2>
+  <p class="sub" data-ru="Medix AI родился из ежедневной работы на скорой: слишком много бумаг, мало времени, высокая цена ошибки.">Medix AI жедел жәрдемдегі күнделікті жұмыстан туды: қағаз көп, уақыт аз, қателіктің бағасы жоғары.</p>
   <ul class="list">
-   <li>Для фельдшеров, врачей СМП и студентов медколледжей</li>
-   <li>Интерфейс на русском и казахском</li>
-   <li>Работает в Telegram — на любом телефоне</li>
-   <li>Развивается по обратной связи реальных бригад</li>
+   <li data-ru="Для фельдшеров, врачей СМП и студентов медколледжей">Фельдшерлерге, ЖМК дәрігерлеріне және медколледж студенттеріне арналған</li>
+   <li data-ru="Интерфейс на казахском и русском">Интерфейс қазақ және орыс тілдерінде</li>
+   <li data-ru="Работает в Telegram — на любом телефоне">Telegram-да жұмыс істейді — кез келген телефонда</li>
+   <li data-ru="Развивается по обратной связи реальных бригад">Нақты бригадалардың пікірі бойынша дамиды</li>
   </ul>
  </div>
  <div class="quote">
-  <p>Medix AI создал действующий фельдшер скорой помощи. Продукт растёт органически, без рекламы: 158 специалистов пришли по рекомендациям коллег.</p>
-  <div>Манас Алпысбаев<small>Основатель, фельдшер СМП, Экибастуз</small></div>
+  <p data-ru="Medix AI создал действующий фельдшер скорой помощи. Продукт растёт органически, без рекламы: уже 158 уникальных пользователей.">Medix AI-ді қызметкер жедел жәрдем фельдшері жасаған. Өнім жарнамасыз, органикалық түрде өсіп келеді: қазірдің өзінде 158 бірегей пайдаланушы бар.</p>
+  <div>Манас Алпысбаев<small data-ru="Основатель, фельдшер СМП, Экибастуз">Негізін қалаушы, ЖМК фельдшері, Екібастұз</small></div>
  </div>
 </div></section>
 
-<section id="faq"><div class="wrap">
- <div class="tag">Вопросы</div>
- <h2>Частые вопросы</h2>
- <details><summary>ИИ заменяет врача или фельдшера?</summary><p>Нет. Medix AI — справочный и вспомогательный инструмент. Все клинические решения принимает специалист, ответственность за лечение остаётся за ним.</p></details>
- <details><summary>Нужно ли что-то устанавливать?</summary><p>Нет. Приложение открывается внутри Telegram.</p></details>
- <details><summary>Как подключиться?</summary><p>Напишите в Telegram боту @medixai_access_bot — мы расскажем, как начать.</p></details>
- <details><summary>Где хранятся данные?</summary><p>Не вводите в приложение персональные данные пациента (ФИО, ИИН). Описывайте вызов без идентифицирующей информации.</p></details>
+<section id="faq" class="alt"><div class="wrap">
+ <div class="tag" data-ru="Вопросы">Сұрақтар</div>
+ <h2 data-ru="Частые вопросы">Жиі қойылатын сұрақтар</h2>
+ <details><summary data-ru="ИИ заменяет врача или фельдшера?">ЖИ дәрігер мен фельдшерді алмастыра ма?</summary><p data-ru="Нет. Medix AI — справочный и вспомогательный инструмент. Все клинические решения принимает специалист, ответственность за лечение остаётся за ним.">Жоқ. Medix AI — анықтамалық әрі көмекші құрал. Барлық клиникалық шешімді маман қабылдайды, емдеу жауапкершілігі соның өзінде қалады.</p></details>
+ <details><summary data-ru="Нужно ли что-то устанавливать?">Бірдеңе орнату керек пе?</summary><p data-ru="Нет. Приложение открывается внутри Telegram.">Жоқ. Қосымша Telegram ішінде ашылады.</p></details>
+ <details><summary data-ru="Как подключиться?">Қалай қосылуға болады?</summary><p data-ru="Напишите в Telegram боту @medixai_access_bot — мы расскажем, как начать.">Telegram-дағы @medixai_access_bot ботына жазыңыз — қалай бастау керектігін айтамыз.</p></details>
+ <details><summary data-ru="Можно ли вводить данные пациента?">Пациенттің деректерін енгізуге бола ма?</summary><p data-ru="Нет. Не вводите в приложение персональные данные пациента (ФИО, ИИН). Описывайте вызов без идентифицирующей информации.">Жоқ. Қосымшаға пациенттің жеке деректерін (аты-жөні, ЖСН) енгізбеңіз. Шақыруды тұлғаны анықтайтын ақпаратсыз сипаттаңыз.</p></details>
 </div></section>
 
 <section class="final"><div class="wrap">
- <h2>Хотите получить доступ к Medix AI?</h2>
- <p class="sub">Напишите в Telegram — расскажем, как подключиться и начать пользоваться уже сегодня.</p>
- <a class="btn btn-p" href="https://t.me/medixai_access_bot" target="_blank" rel="noopener">Написать в Telegram →</a>
+ <h2 data-ru="Хотите получить доступ к Medix AI?">Medix AI-ге қолжетімділік алғыңыз келе ме?</h2>
+ <p class="sub" data-ru="Напишите в Telegram — расскажем, как подключиться и начать пользоваться уже сегодня.">Telegram-ға жазыңыз — қалай қосылуды айтып, бүгіннен бастап пайдалануға көмектесеміз.</p>
+ <a class="btn btn-p" href="https://t.me/medixai_access_bot" target="_blank" rel="noopener" data-ru="Написать в Telegram →">Telegram-ға жазу →</a>
  <div class="contacts">
   <a href="mailto:14manas98@gmail.com">14manas98@gmail.com</a>
   <a href="tel:+77710431073">+7 771 043-10-73</a>
@@ -226,8 +228,30 @@ footer p{max-width:620px}
 </main>
 
 <footer><div class="wrap">
- <div>© 2026 Medix AI · Казахстан</div>
- <p>Medix AI — справочный инструмент для медицинских специалистов. Не является медицинским изделием и не заменяет клиническое решение врача или фельдшера.</p>
+ <div data-ru="© 2026 Medix AI · Казахстан">© 2026 Medix AI · Қазақстан</div>
+ <p data-ru="Medix AI — справочный инструмент для медицинских специалистов. Не является медицинским изделием и не заменяет клиническое решение врача или фельдшера.">Medix AI — медицина мамандарына арналған анықтамалық құрал. Медициналық бұйым болып табылмайды және дәрігердің немесе фельдшердің клиникалық шешімін алмастырмайды.</p>
 </div></footer>
+
+<script>
+(function(){
+ var els=document.querySelectorAll('[data-ru]');
+ for(var i=0;i<els.length;i++){var e=els[i];e.setAttribute('data-kk',e.tagName==='META'?e.getAttribute('content'):e.innerHTML);}
+ function set(l){
+  for(var i=0;i<els.length;i++){
+   var e=els[i],v=e.getAttribute(l==='ru'?'data-ru':'data-kk');
+   if(e.tagName==='META'){e.setAttribute('content',v);}else{e.innerHTML=v;}
+  }
+  document.documentElement.lang=l==='ru'?'ru':'kk';
+  document.title=document.querySelector('title').getAttribute(l==='ru'?'data-ru':'data-kk');
+  var b=document.querySelectorAll('.lang button');
+  for(var j=0;j<b.length;j++){b[j].className=b[j].getAttribute('data-l')===l?'on':'';}
+  try{localStorage.setItem('medix_lang',l);}catch(x){}
+ }
+ var b=document.querySelectorAll('.lang button');
+ for(var k=0;k<b.length;k++){b[k].addEventListener('click',function(){set(this.getAttribute('data-l'));});}
+ var l='kk';try{var s=localStorage.getItem('medix_lang');if(s==='ru'||s==='kk')l=s;}catch(x){}
+ if(l==='ru')set('ru');
+})();
+</script>
 </body>
 </html>
